@@ -27,7 +27,7 @@ celery.Task = ContextTask
 @celery.task()
 def match_photos(path_1, path_2):
 
-    result = example(path_1, "lama_new.png")
+    result = example(path_1, path_2)
     return result
 
 class Comparison(MethodView):
@@ -37,7 +37,7 @@ class Comparison(MethodView):
         return jsonify({"status": task.status, "result": task.result})
 
     def post(self):
-        image_pathes = [self.save_image(field) for field in ("image_1")]
+        image_pathes = [self.save_image(field) for field in ("image_1", "image_2")]
         task = match_photos.delay(*image_pathes)
         return jsonify({"task_id": task.id})
 
