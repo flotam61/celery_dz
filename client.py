@@ -6,7 +6,7 @@ HOST = "http://127.0.0.1:5000/comparison"
 img_1 = open('lama_300px.png', 'rb')
 
 
-task_id = requests.get(HOST, files={'image_1': img_1, 'image_2': 'lama_new'}).json()['task_id']
+task_id = requests.get(HOST, files={'image_1': img_1}).json()['task_id']
 
 status = 'PENDING'
 result = None
